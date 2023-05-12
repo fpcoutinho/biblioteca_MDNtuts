@@ -8,6 +8,7 @@ const keys = require("dotenv").config().parsed;
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const catalogRouter = require("./routes/catalog");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/catalog", catalogRouter);
 
 //Conexão ao MongoDB
 const uri = `mongodb+srv://${keys.DB_USR}:${keys.DB_PWD}@${keys.DB_TAG}.zeylprr.mongodb.net/biblioteca_local?retryWrites=true&w=majority`;
