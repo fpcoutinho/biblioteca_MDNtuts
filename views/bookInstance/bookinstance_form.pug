@@ -16,16 +16,15 @@ block content
       input#imprint.form-control(type='text' placeholder='Publisher and date information' name='imprint' required='true' value=(undefined===bookinstance ? '' : bookinstance.imprint))
     div.form-group
       label(for='due_back') Date when book available:
-      input#due_back.form-control(type='date' name='due_back' value=(undefined===bookinstance ? '' : bookinstance.due_back))
+      input#due_back.form-control(type='date' name='due_back' value=(undefined===bookinstance ? '' : bookinstance.due_back_yyyy_mm_dd))
 
     div.form-group
       label(for='status') Status:
       select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
-        option(value='Maintenance') Maintenance
-        option(value='Available') Available
-        option(value='Loaned') Loaned
-        option(value='Reserved') Reserved
-
+        - const options = ['Maintenance', 'Loaned', 'Reserved', 'Available']
+        for option in options
+          option(value=option, selected=(undefined===bookinstance ? '' : bookinstance.status === option ? 'selected' : false)) #{option}
+        
     button.btn.btn-primary(type='submit') Submit
 
   if errors
