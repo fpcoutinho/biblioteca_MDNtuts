@@ -27,7 +27,8 @@ app.use("/users", usersRouter);
 app.use("/catalog", catalogRouter);
 
 //Conexão ao MongoDB
-const uri = `mongodb+srv://${keys.DB_USR}:${keys.DB_PWD}@${keys.DB_TAG}.grodets.mongodb.net/biblioteca?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${keys.DB_USR}:${keys.DB_PWD}@${keys.DB_TAG}.grodeat.mongodb.net/biblioteca?retryWrites=true&w=majority`;
+
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
