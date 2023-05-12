@@ -1,28 +1,27 @@
 extends ../layout
 
 block content
-  h1 #{title}: #{author.name}
-  p= author.lifespan
+  h1 #{title}: #{genre.name}
 
-  if author_books.length
+  if genre_books.length
 
-    p #[strong Delete the following books before attempting to delete this author.]
+    p #[strong Delete the following books before attempting to delete this genre.]
 
     div(style='margin-left:20px;margin-top:20px')
 
       h4 Books
 
       dl
-      each book in author_books
+      each book in genre_books
         dt
           a(href=book.url) #{book.title}
         dd #{book.summary}
 
   else
-    p Do you really want to delete this Author?
+    p Do you really want to delete this Genre?
 
     form(method='POST' action='')
       div.form-group
-        input#authorid.form-control(type='hidden',name='authorid', required='true', value=author._id )
+        input#genreid.form-control(type='hidden',name='genreid', required='true', value=genre._id )
 
       button.btn.btn-primary(type='submit') Delete

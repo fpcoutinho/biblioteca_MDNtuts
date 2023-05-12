@@ -1,28 +1,28 @@
 extends ../layout
 
 block content
-  h1 #{title}: #{author.name}
-  p= author.lifespan
+  h1 #{title} of #[em !{bookinstance.book.title}]
+  p #[strong Copy ID: ] 
+    a(href=bookinstance.url) #{bookinstance._id}
+  p #[strong Book URL:]
+    a(href=bookinstance.book.url) #{bookinstance.book.title}
+  p #[strong Imprint:] #{bookinstance.imprint}
 
-  if author_books.length
+  p #[strong Status:]
+    if bookinstance.status=='Available'
+      span.text-success #{bookinstance.status}
+    else if bookinstance.status=='Maintenance'
+      span.text-danger #{bookinstance.status}
+    else
+      span.text-warning #{bookinstance.status}
 
-    p #[strong Delete the following books before attempting to delete this author.]
+  if bookinstance.status!='Available'
+    p #[strong Due back:] #{bookinstance.due_back_formatted}
 
-    div(style='margin-left:20px;margin-top:20px')
+  p Do you really want to delete this Copy?
 
-      h4 Books
+  form(method='POST' action='')
+    div.form-group
+      input#bookinstanceid.form-control(type='hidden',name='bookinstanceid', required='true', value=bookinstance._id )
 
-      dl
-      each book in author_books
-        dt
-          a(href=book.url) #{book.title}
-        dd #{book.summary}
-
-  else
-    p Do you really want to delete this Author?
-
-    form(method='POST' action='')
-      div.form-group
-        input#authorid.form-control(type='hidden',name='authorid', required='true', value=author._id )
-
-      button.btn.btn-primary(type='submit') Delete
+    button.btn.btn-primary(type='submit') Delete

@@ -199,14 +199,14 @@ exports.author_update_post = [
       // There are errors. Render form again with sanitized values/errors messages.
       res.render("author/author_form", {
         title: "Update Author",
-        author: author,
+        author: updatedAuthor,
         errors: errors.array(),
       });
       return;
     } else {
       // Data from form is valid. Update the record.
       await Author.findByIdAndUpdate(req.params.id, updatedAuthor);
-
+      console.log(updatedAuthor.formatted);
       // Redirect to new author record.
       res.redirect(updatedAuthor.url);
     }

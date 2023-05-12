@@ -33,11 +33,14 @@ AuthorSchema.virtual("url").get(function () {
 AuthorSchema.virtual("formatted").get(function () {
   return {
     date_of_birth: this.date_of_birth
-      ? DateTime.fromJSDate(new Date(this.date_of_birth)).toFormat("yyyy-MM-dd")
+      ? DateTime.fromJSDate(this.date_of_birth, { zone: "utc" }).toFormat(
+          "yyyy-MM-dd"
+        )
       : "",
-
     date_of_death: this.date_of_death
-      ? DateTime.fromJSDate(new Date(this.date_of_death)).toFormat("yyyy-MM-dd")
+      ? DateTime.fromJSDate(this.date_of_death, { zone: "utc" }).toFormat(
+          "yyyy-MM-dd"
+        )
       : "",
   };
 });
@@ -46,13 +49,13 @@ AuthorSchema.virtual("lifespan").get(function () {
   let lifespan = "";
 
   if (this.date_of_birth)
-    lifespan += DateTime.fromJSDate(this.date_of_birth).toLocaleString(
-      DateTime.DATE_MED
-    );
+    lifespan += DateTime.fromJSDate(this.date_of_birth, {
+      zone: "utc",
+    }).toLocaleString(DateTime.DATE_MED);
   if (this.date_of_death)
-    lifespan += ` - ${DateTime.fromJSDate(this.date_of_death).toLocaleString(
-      DateTime.DATE_MED
-    )}`;
+    lifespan += ` - ${DateTime.fromJSDate(this.date_of_death, {
+      zone: "utc",
+    }).toLocaleString(DateTime.DATE_MED)}`;
 
   return lifespan;
 });
