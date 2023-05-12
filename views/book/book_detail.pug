@@ -12,6 +12,13 @@ block content
       a(href=val.url) #{val.name}
       if index < book.genre.length - 1
         |,
+  hr
+  ul.postMenu 
+    li
+      a(href=book.url+'/delete') Delete Book
+    li
+      a(href=book.url+'/update') Update Book
+
 
   div(style='margin-left:20px;margin-top:20px')
     h4 Copies

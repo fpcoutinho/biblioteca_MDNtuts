@@ -16,3 +16,15 @@ body {
   color: crimson;
   padding: 1rem;
 }
+
+.postMenu {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin-bottom: 1rem;
+  margin-left: 20px;
+}
+
+.postMenu li {
+  list-style: none;
+}
