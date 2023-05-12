@@ -4,7 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const keys = require("dotenv").config().parsed;
+require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -27,7 +27,7 @@ app.use("/users", usersRouter);
 app.use("/catalog", catalogRouter);
 
 //Conexão ao MongoDB
-const uri = `mongodb+srv://${keys.DB_USR}:${keys.DB_PWD}@${keys.DB_TAG}.grodeat.mongodb.net/biblioteca?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_TAG}.grodeat.mongodb.net/biblioteca?retryWrites=true&w=majority`;
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
